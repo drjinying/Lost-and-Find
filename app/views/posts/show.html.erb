@@ -1,0 +1,40 @@
+<% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+<article class="panel">
+  <h4 class="panel-heading"><%= @post.title %></h4>
+  <%= @post.body %>
+  <br>
+  <p>
+    <strong>用户:</strong> <%= @post.user.email %> <strong>发表于 :</strong> <%= @post.created_at %>
+  </p>
+  <% if can? :update, @post %>
+    <%= link_to '编辑', edit_post_path(@post), class: 'label label-warning lab-sx' %> |
+  <% end %>
+  <%= link_to '返回', posts_path ,class: 'label label-default lab-sx' %>
+</article>
+
+<% if !@post.comments.first.id.nil? %>
+<section class="panel">
+  <h5 class="panel-heading">评论</h5>
+  <% @post.comments.each do |comment| if !comment.id.nil?   %>
+  <section class="panel">
+    <h5 class="panel-heading"><%= comment.title %> - <%= comment.user.email %></h5>
+  	<p><%= comment.body %></p>
+    <% if can? :update, comment %>
+      <%= link_to '编辑', edit_post_comment_path(@post , comment), class: 'label label-warning lab-sx' %> |
+    <% end %>
+    <% if can? :destroy, comment %>
+      <%= link_to '删除', post_comment_path(@post , comment), method: :delete, data: { confirm: '确认删除吗?' }, class: 'label label-danger btn-xs' %>
+    <% end %>
+	</section>
+  <% end end %>
+</section>
+<% end %>
+<% if can? :create, @comment %>
+<section class="panel">
+  <h5 class="panel-heading">添加评论：</h5>
+  <%= render 'comments/form' %>
+</section>
+<% end %>
+<%= link_to '返回', posts_path ,class: 'btn btn-danger' %>

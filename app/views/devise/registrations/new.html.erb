@@ -1,0 +1,17 @@
+<section class="panel">
+<h4 class="panel-heading">注册</h4>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %>
+  <%= f.email_field :email, :autofocus => true, class: 'form-control' %></div>
+
+  <div><%= f.label :password %>
+  <%= f.password_field :password , class: 'form-control'%></div>
+
+  <div><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %></div>
+  <br />
+  <%= f.submit "注册", class: 'btn btn-success' %>&nbsp;<div class="pull-right"><%= render "devise/shared/links" %></div>
+<% end %>

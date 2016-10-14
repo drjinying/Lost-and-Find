@@ -1,0 +1,11 @@
+<section class="panel">
+<h4 class="panel-heading">忘记密码?</h4>
+
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %>
+  <%= f.email_field :email, :autofocus => true, class: 'form-control' %></div>
+  <br />
+  <%= f.submit "发送密码还原邮件", class: 'btn btn-success' %>&nbsp;<div class="pull-right"><%= render "devise/shared/links" %></div>
+<% end %>

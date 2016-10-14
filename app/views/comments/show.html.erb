@@ -1,0 +1,23 @@
+<p>
+  <strong>标题：</strong>
+  <%= @comment.title %>
+</p>
+
+<p>
+  <strong>内容:</strong>
+  <%= @comment.body %>
+</p>
+
+<p>
+  <strong>发表:</strong>
+  <%= @comment.post %>
+</p>
+
+<p>
+  <strong>用户:</strong>
+  <%= @comment.user %>
+</p>
+<% if can? :update, @comment %>
+<%= link_to '编辑', post_comments_path(@comment[:post_id], @comment[:id]) %> |
+<% end %>
+<%= link_to '返回', post_comments_path %>

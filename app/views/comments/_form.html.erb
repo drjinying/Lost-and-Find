@@ -1,0 +1,24 @@
+<%= form_for([@post, @comment]) do |f| %>
+  <% if !@comment.nil? && @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :标题 %><br />
+    <%= f.text_field :title , class: 'form-control'%>
+  </p>
+  <p>
+    <%= f.label :内容 %><br />
+    <%= f.text_area :body , class: 'form-control'%>
+  </p>
+  <p>
+    <%= f.submit "提交评论", class: 'btn btn-success btn-sx' %>
+  </p>
+<% end %>

@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+<article class="panel">
+
+<h4 class="panel-heading">编辑寻物启事</h4>
+<%= render 'form' %>
+
+<%= link_to '查看', @post, class: 'label label-primary label-sx' %> |
+<%= link_to '返回', posts_path, class: 'label label-default label-sx' %>
+</article>
+
+<% if @post.comments.length > 0 %>
+<p>
+  <section class="panel">
+    <h5 class="panel-heading">评论</h5>
+  <% @post.comments.each do |comment| if !comment.id.nil?   %>
+  <section class="panel">
+    <h5 class="panel-heading"><%= comment.title %> - <%= comment.user.email %></h5>
+  		<p><%= comment.body %></p>
+     <%= link_to '编辑', edit_post_comment_path(@post , comment), class: 'label label-warning label-sx' %> |
+     <%= link_to '删除', post_comment_path(@post , comment), method: :delete, data: { confirm: '好不容易写的 Are you sure 你就这么删了?' }, class: 'label label-danger btn-xs' %>
+	</section>
+
+  <% end end %>
+  </section>
+</p>
+<% end %>
